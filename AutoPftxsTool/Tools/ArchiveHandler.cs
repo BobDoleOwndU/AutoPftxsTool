@@ -51,9 +51,10 @@ namespace AutoPftxsTool
             for(int i = 0; i < files.Length; i++)
             {
                 files[i] = files[i].Replace(SourceDirectory, "").Replace("\\", "/");
-                string pathString = "/";
+                string pathString = "\\";
 
-                if (files[i][1] != 'A')
+                //if it exists in the source directory, not a sub-directory, remove the '/'.
+                if (File.Exists(SourceDirectory + "\\" + Path.GetFileName(files[i])))
                 {
                     files[i] = files[i].Substring(1);
                     pathString = "";
@@ -61,7 +62,7 @@ namespace AutoPftxsTool
 
                 if (Path.GetExtension(files[i]) == ".ftex")
                 {
-                    Console.WriteLine(files[i]);
+                    //Console.WriteLine(files[i]);
                     string nameWithoutExtension = Path.GetFileNameWithoutExtension(files[i]);
 
                     PftxsFtexFile pf = new PftxsFtexFile();
@@ -71,31 +72,33 @@ namespace AutoPftxsTool
                     pf.Entries.Add(pfe);
                     pf.Entries.Add(pfe1);
 
-                    if (File.Exists(SourceDirectory + "\\" + nameWithoutExtension + ".2.ftexs"))
+                    Console.WriteLine(SourceDirectory + "\\" + Path.GetDirectoryName(files[i]) + pathString + nameWithoutExtension + ".2.ftexs");
+
+                    if (File.Exists(SourceDirectory + "\\" + Path.GetDirectoryName(files[i]) + pathString + nameWithoutExtension + ".2.ftexs"))
                     {
                         PftxsFtexsFileEntry pfe2 = new PftxsFtexsFileEntry() { FilePath = Path.GetDirectoryName(files[i]) + pathString + nameWithoutExtension + ".2.ftexs" };
                         pf.Entries.Add(pfe2);
                     } //if ends
 
-                    if (File.Exists(SourceDirectory + "\\" + nameWithoutExtension + ".3.ftexs"))
+                    if (File.Exists(SourceDirectory + "\\" + Path.GetDirectoryName(files[i]) + pathString + nameWithoutExtension + ".3.ftexs"))
                     {
                         PftxsFtexsFileEntry pfe2 = new PftxsFtexsFileEntry() { FilePath = Path.GetDirectoryName(files[i]) + pathString + nameWithoutExtension + ".3.ftexs" };
                         pf.Entries.Add(pfe2);
                     } //if ends
 
-                    if (File.Exists(SourceDirectory + "\\" + nameWithoutExtension + ".4.ftexs"))
+                    if (File.Exists(SourceDirectory + "\\" + Path.GetDirectoryName(files[i]) + pathString + nameWithoutExtension + ".4.ftexs"))
                     {
                         PftxsFtexsFileEntry pfe2 = new PftxsFtexsFileEntry() { FilePath = Path.GetDirectoryName(files[i]) + pathString + nameWithoutExtension + ".4.ftexs" };
                         pf.Entries.Add(pfe2);
                     } //if ends
 
-                    if (File.Exists(SourceDirectory + "\\" + nameWithoutExtension + ".5.ftexs"))
+                    if (File.Exists(SourceDirectory + "\\" + Path.GetDirectoryName(files[i]) + pathString + nameWithoutExtension + ".5.ftexs"))
                     {
                         PftxsFtexsFileEntry pfe2 = new PftxsFtexsFileEntry() { FilePath = Path.GetDirectoryName(files[i]) + pathString + nameWithoutExtension + ".5.ftexs" };
                         pf.Entries.Add(pfe2);
                     } //if ends
 
-                    if (File.Exists(SourceDirectory + "\\" + nameWithoutExtension + ".6.ftexs"))
+                    if (File.Exists(SourceDirectory + "\\" + Path.GetDirectoryName(files[i]) + pathString + nameWithoutExtension + ".6.ftexs"))
                     {
                         PftxsFtexsFileEntry pfe2 = new PftxsFtexsFileEntry() { FilePath = Path.GetDirectoryName(files[i]) + pathString + nameWithoutExtension + ".6.ftexs" };
                         pf.Entries.Add(pfe2);
